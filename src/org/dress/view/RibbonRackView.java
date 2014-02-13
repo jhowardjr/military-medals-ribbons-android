@@ -19,14 +19,17 @@ import android.widget.TableRow;
 import android.widget.ImageView.ScaleType;
 
 public class RibbonRackView extends View {
-	TableLayout table;
+	private TableLayout mTable;
 	private ScaleGestureDetector mScaleDetector;
 	private float mScaleFactor = 1.f;
-	Context context;
+	private Context mContext;
+	private static final int NUM_OF_COLUMNS = 3;
+	private static final float MIN_SCALE = 0.1f;
+	private static final float MAX_SCALE = 5.1f;
 
 	public RibbonRackView(Context context) {
 		super(context);
-		this.context = context;
+		this.mContext = context;
 		mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
 	}
 
@@ -41,7 +44,7 @@ public class RibbonRackView extends View {
 		super.onDraw(canvas);
 		canvas.save();
 		canvas.scale(mScaleFactor, mScaleFactor);
-		table.draw(canvas);
+		mTable.draw(canvas);
 		canvas.restore();
 	}
 
@@ -55,47 +58,47 @@ public class RibbonRackView extends View {
 
 		}
 
-		table = new TableLayout(context);
-		
+		mTable = new TableLayout(mContext);
+
 		LayoutParams params = new LinearLayout.LayoutParams(
 				android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.MATCH_PARENT);
 
 		while (queue.size() > 0) {
 
-			table.addView(buildRack(queue), params);
+			mTable.addView(buildRack(queue), params);
 		}
 
-		table.setGravity(Gravity.CENTER);
+		mTable.setGravity(Gravity.CENTER);
 
-		table.setBackgroundResource(R.drawable.rackbackground);
+		mTable.setBackgroundResource(R.drawable.rackbackground);
 	}
 
 	public TableLayout getTableLayout() {
-		
-		return table;
-		
+
+		return mTable;
+
 	}
 
 	private TableRow buildRack(LinkedList<Integer> stack) {
 
-		int width = context.getResources().getDrawable(R.drawable.r005)
+		int width = mContext.getResources().getDrawable(R.drawable.r005)
 				.getIntrinsicWidth();
-		
-		int height = context.getResources().getDrawable(R.drawable.r005)
+
+		int height = mContext.getResources().getDrawable(R.drawable.r005)
 				.getIntrinsicHeight();
 
-		TableRow row = new TableRow(context);
+		TableRow row = new TableRow(mContext);
 
-		int top = stack.size() % 3;
+		int top = stack.size() % NUM_OF_COLUMNS;
 
 		if (top == 0) {
-			top = 3;
+			top = NUM_OF_COLUMNS;
 		}
 		for (int i = 0; i < top; i++) {
-			
+
 			ImageView iv = getImage(stack.remove());
-			
+
 			iv.setAdjustViewBounds(true);
 
 			iv.setScaleType(ScaleType.CENTER_CROP);
@@ -104,7 +107,7 @@ public class RibbonRackView extends View {
 		}
 
 		row.setPadding(2, 2, 2, 2);
-		
+
 		row.setGravity(Gravity.CENTER);
 
 		return row;
@@ -112,7 +115,7 @@ public class RibbonRackView extends View {
 	}
 
 	private ImageView getImage(int i) {
-		ImageView iv = new ImageView(context);
+		ImageView iv = new ImageView(mContext);
 		iv.setImageResource(i);
 		return iv;
 
@@ -125,7 +128,8 @@ public class RibbonRackView extends View {
 			mScaleFactor *= detector.getScaleFactor();
 
 			// Don't let the object get too small or too large.
-			mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
+			mScaleFactor = Math.max(MIN_SCALE,
+					Math.min(mScaleFactor, MAX_SCALE));
 
 			invalidate();
 			return true;

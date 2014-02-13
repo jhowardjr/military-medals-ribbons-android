@@ -9,20 +9,20 @@ import org.dress.model.RibbonViewNode;
 import org.dress.view.RibbonRackView;
 import org.dress.view.adapter.ImageAdapter;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.os.Bundle;
 
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.widget.LinearLayout;
 
-public class Rack extends Activity {
+public class Rack extends ActionBarActivity {
 
 	private static final String PREFS_NAME = "CONFIG";
 
@@ -32,13 +32,13 @@ public class Rack extends Activity {
 
 		setContentView(R.layout.rack);
 
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 
 		SharedPreferences settings = this.getSharedPreferences(PREFS_NAME,
 				Activity.MODE_PRIVATE);
 		String rack = settings.getString("RACK", "");
 
-		int position = settings.getInt("BRANCH", 99);
+		int position = settings.getInt("BRANCH", BranchList.DEFAULT_BRANCH);
 
 		String viewHeader = this.getResources().getStringArray(
 				R.array.branch_array)[position];
@@ -46,9 +46,9 @@ public class Rack extends Activity {
 		actionBar.setTitle(viewHeader);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
-		RibbonViewNode node = RibbonViewFactory.getNode(position);
+		RibbonViewNode node = RibbonViewFactory.getNode(Rack.this, position);
 
-		ImageAdapter ia = new ImageAdapter(node);
+		ImageAdapter ia = new ImageAdapter(Rack.this, node);
 
 		String[] ta = ia.getTypedArray();
 
@@ -71,7 +71,7 @@ public class Rack extends Activity {
 
 		}
 
-		RibbonRackView view = new RibbonRackView(this);
+		RibbonRackView view = new RibbonRackView(Rack.this);
 		view.fillTableLayout(ribbons);
 
 		addContentView(view.getTableLayout(), new LinearLayout.LayoutParams(
@@ -82,9 +82,7 @@ public class Rack extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.share_rack, menu);
+		getMenuInflater().inflate(R.menu.share_rack, menu);
 		return true;
 	}
 

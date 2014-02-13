@@ -9,20 +9,24 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 public class AwardCheckBox extends CheckBox implements OnCheckedChangeListener {
 
 	public static final String PREFS_NAME = "CONFIG";
-	private String imgResIdString;
-	private Context context;
+	private String mImgResIdString;
+	private Context mContext;
+	
+	public AwardCheckBox(Context context) {
+		super(context);
+	}
 
 	public AwardCheckBox(Context context, int imgResId) {
 		super(context);
-		this.context = context;
-		this.imgResIdString = Integer.toString(imgResId);
+		this.mContext = context;
+		this.mImgResIdString = Integer.toString(imgResId);
 		String pattern = "";
 		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME,
 				Context.MODE_PRIVATE);
 
 		String rack = settings.getString("RACK", "");
 
-		pattern = "#" + imgResIdString + "#";
+		pattern = "#" + mImgResIdString + "#";
 
 		if (rack.contains(pattern)) {
 			this.setChecked(true);
@@ -31,8 +35,8 @@ public class AwardCheckBox extends CheckBox implements OnCheckedChangeListener {
 	}
 
 	private void checkButtonClick(final String imgResIdString, boolean isChecked) {
-		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME,
-				Context.MODE_WORLD_READABLE);
+		SharedPreferences settings = mContext.getSharedPreferences(PREFS_NAME,
+				Context.MODE_PRIVATE);
 
 		String rack = settings.getString("RACK", "");
 
@@ -59,7 +63,7 @@ public class AwardCheckBox extends CheckBox implements OnCheckedChangeListener {
 	@Override
 	public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
 
-		checkButtonClick(imgResIdString, isChecked);
+		checkButtonClick(mImgResIdString, isChecked);
 
 	}
 

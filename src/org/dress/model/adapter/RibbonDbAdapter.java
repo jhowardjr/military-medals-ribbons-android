@@ -1,130 +1,101 @@
 package org.dress.model.adapter;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
-import org.dress.ApplicationContext;
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class RibbonDbAdapter {
+	
 
-	private RibbonDbHelper dbhelper;
-	private SQLiteDatabase db;
+	private RibbonDbHelper mDbHelper;
+	private SQLiteDatabase mDb;
 	private static final String SQL = "SELECT ZRIBBONNAME,ZRIBBONDESC,ZRIBBONIMAGE FROM ZRIBBON WHERE ZORGRIBBON = ?";
-	ArrayList<String> desc = new ArrayList<String>();
-	ArrayList<String> longdesc = new ArrayList<String>();
-	ArrayList<String> image = new ArrayList<String>();
 
-	public RibbonDbAdapter() {
-		dbhelper = new RibbonDbHelper(ApplicationContext.getContext());
-		dbhelper.createNewDatabase();
+	public static final int ARMY_DB_ID = 1;
+	public static final int NAVY_DB_ID = 2;
+	public static final int AIRFORCE_DB_ID = 3;
+	public static final int MARINES_DB_ID = 4;
+	public static final int COAST_DB_ID = 5;
+	public static final int LA_DB_ID = 6;
+	public static final int CAPC_DB_ID = 7;
+	public static final int CAPS_DB_ID = 8;
+	public static final int ARMY_ROTC_DB_ID = 9;
+	public static final int AIR_FORCE_ROTC_DB_ID = 10;
+	public static final int NAVY_JROTC_DB_ID = 11;
+	public static final int ARMY_JROTC_DB_ID = 12;
+	public static final int AIR_FORCE_JROTC_DB_ID = 13;
+	public static final int NAVY_ROTC_DB_ID = 14;
+	
+	private ArrayList<String> mDesc = new ArrayList<String>();
+	private ArrayList<String> mLongDesc = new ArrayList<String>();
+	private ArrayList<String> mImage = new ArrayList<String>();
+
+	public RibbonDbAdapter(Context context) {
+		mDbHelper = new RibbonDbHelper(context);
 	}
 
-	private static class RibbonDbHelper extends SQLiteOpenHelper {
+	private static class RibbonDbHelper extends SQLiteAssetHelper {
 		private static final int DATABASE_VERSION = 01;
 		private static final String DB_NAME = "MedalsRibbons";
-		private static final String DB_PATH = "/data/data/org.dress/databases/";
-		private static final String TAG = "DbManager";
-		private final Context context;
 
 		RibbonDbHelper(Context context) {
 			super(context, DB_NAME, null, DATABASE_VERSION);
-			this.context = context;
-
 		}
-
-		@Override
-		public void onCreate(SQLiteDatabase db) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			// TODO Auto-generated method stub
-
-		}
-
-		public void createNewDatabase() {
-			InputStream assetsDB = null;
-			try {
-				assetsDB = this.context.getAssets().open(DB_NAME);
-				OutputStream dbOut = new FileOutputStream(DB_PATH + DB_NAME);
-
-				byte[] buffer = new byte[1024];
-				int length;
-				while ((length = assetsDB.read(buffer)) > 0) {
-					dbOut.write(buffer, 0, length);
-				}
-
-				dbOut.flush();
-				dbOut.close();
-				assetsDB.close();
-				Log.i(TAG, "New database created...");
-			} catch (IOException e) {
-				Log.e(TAG, "Could not create new database...");
-				e.printStackTrace();
-			}
-		}
-
 	}
 
 	public RibbonDbAdapter open() {
-		db = dbhelper.getReadableDatabase();
+		mDb = mDbHelper.getReadableDatabase();
 		return this;
 	}
 
 	public String[] getDesc() {
 
-		String str[] = new String[desc.size()];
-		desc.toArray(str);
+		String[] str = new String[mDesc.size()];
+		mDesc.toArray(str);
 
 		return str;
 	}
 
 	public String[] getLongDesc() {
 
-		String str[] = new String[longdesc.size()];
-		longdesc.toArray(str);
+		String[] str = new String[mLongDesc.size()];
+		mLongDesc.toArray(str);
 
 		return str;
 	}
 
 	public String[] getImage() {
 
-		String str[] = new String[image.size()];
-		image.toArray(str);
+		String[] str = new String[mImage.size()];
+		mImage.toArray(str);
 
 		return str;
 	}
 
 	public void queryRibbon(int i) {
 		String[] params = { Integer.toString(i) };
-		Cursor cursor = db.rawQuery(SQL, params);
+		Cursor cursor = mDb.rawQuery(SQL, params);
 
 		cursor.moveToFirst();
 
-		desc.add(cursor.getString(0));
-		longdesc.add(cursor.getString(1));
-		image.add(cursor.getString(2));
+		mDesc.add(cursor.getString(0));
+		mLongDesc.add(cursor.getString(1));
+		mImage.add(cursor.getString(2));
 
 		while (cursor.moveToNext()) {
-			desc.add(cursor.getString(0));
-			longdesc.add(cursor.getString(1));
-			image.add(cursor.getString(2));
+			mDesc.add(cursor.getString(0));
+			mLongDesc.add(cursor.getString(1));
+			mImage.add(cursor.getString(2));
 		}
 
 	}
 
 	public void close() {
-		dbhelper.close();
+		mDbHelper.close();
 	}
 
 }

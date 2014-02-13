@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-  xmlns:android="http://schemas.android.com/apk/res/android"><item android:id="@+id/menu_ribbon" android:title="Build"  android:icon="@drawable/ic_menu_ribbon" android:showAsAction="always|withText"></item>ic_social_share
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/menu_ribbon"
+        android:icon="@drawable/ic_menu_ribbon"
+        android:title="@string/build"
+        android:visible="true"
+        app:showAsAction="ifRoom">
+    </item>
+
 </menu>

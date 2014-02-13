@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="build">Build</string>
+    <string name="share">Build</string>
 	<string name="app_name">Military Medals and Ribbons</string>
 	<string name="branch_header">Select an Organization</string>
 	<string name="ribbon_header">Select an Award</string>

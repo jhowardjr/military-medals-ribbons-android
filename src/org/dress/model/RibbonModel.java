@@ -2,10 +2,15 @@ package org.dress.model;
 
 import org.dress.model.adapter.RibbonDbAdapter;
 
-public class RibbonModel {
+import android.content.Context;
 
-	public static RibbonViewNode getRibbonNode(int ribbonId) {
-		RibbonDbAdapter db = new RibbonDbAdapter();
+public final class RibbonModel {
+	private RibbonModel() {
+		
+	}
+	
+	public static RibbonViewNode getRibbonNode(Context context, int ribbonId) {
+		RibbonDbAdapter db = new RibbonDbAdapter(context);
 		db.open();
 		db.queryRibbon(ribbonId);
 		String[] mDesc = db.getDesc();
