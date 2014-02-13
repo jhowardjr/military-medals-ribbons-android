@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Military Medals and Ribbons</string>
+	<string name="branch_header">Select an Organization</string>
+	<string name="ribbon_header">Select an Award</string>
+	<string name="ribbon_desc">Ribbon Description</string>
+	<string-array name="branch_array">
+		<item>U.S. Army</item>
+		<item>U.S. Air Force</item>
+		<item>U.S. Navy</item>
+		<item>U.S. Marines</item>
+		<item>U.S. Coast Guard</item>
+		<item>L.A. Police Department</item>
+		<item>Civil Air Patrol - Cadet</item>
+		<item>Civil Air Patrol - Senior</item>
+		<item>U.S. Army - JROTC</item>
+		<item>U.S. Army - ROTC</item>
+		<item>U.S. Air Force - JROTC</item>
+		<item>U.S. Air Force - ROTC</item>
+		<item>U.S. Navy - JROTC</item>
+		<item>U.S. Navy - ROTC</item>
+
+	</string-array>
+
+	<array name="branch_image">
+		<item>logo.png</item>
+		<item>logo.png</item>
+		<item>logo.png</item>
+		<item>logo.png</item>
+		<item>logo.png</item>
+		<item>logo.png</item>
+		<item>logo.png</item>
+		<item>logo.png</item>
+		<item>logo.png</item>
+		<item>logo.png</item>
+		<item>logo.png</item>
+		<item>logo.png</item>
+		<item>logo.png</item>
+		<item>logo.png</item>
+	</array>
+
+</resources>

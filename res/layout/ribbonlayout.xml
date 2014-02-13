@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="#FFFFFF"
+    android:measureWithLargestChild="true"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/ribbonImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0"
+        android:contentDescription="@string/app_name"
+        android:padding="8dp"
+        android:scaleType="center"
+        />
+
+    <TextView
+        android:id="@+id/ribbonTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:padding="8dp"
+        android:text="@string/ribbon_desc"
+        android:textColor="#000000" />
+
+    <CheckBox
+        android:id="@+id/ribbonCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0"
+        android:button="@xml/check_box"
+        android:padding="8dp" />
+
+</LinearLayout>
