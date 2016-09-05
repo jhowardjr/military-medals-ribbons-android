@@ -1,35 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/popupbackground"
-    android:orientation="vertical" >
-
-    <Button
-        android:id="@+id/closeButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|right"
-        android:layout_marginLeft="0dp"
-        android:background="@drawable/close"
-        android:minHeight="36dip"
-        android:minWidth="36dip" />
-
-    <ImageView
-        android:id="@+id/awardImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:contentDescription="@string/app_name"/>
-
-    <TextView
-        android:id="@+id/awardTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="@string/app_name"
-        android:textColor="#FFFFFF"
-        android:textSize="12dp" />
-
-</LinearLayout>
