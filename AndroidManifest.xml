@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="org.dress"
+      android:versionCode="5" android:versionName="1.4">
+    <application android:name=".ApplicationContext" android:label="@string/app_name"
+    android:theme="@android:style/Theme.Holo.NoActionBar" android:icon="@drawable/icon" >
+        <activity android:name=".controller.BranchList"
+                  android:label="@string/app_name"
+                  android:screenOrientation="portrait"
+                  android:theme="@android:style/Theme.Holo.Light">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".controller.RibbonList" 
+        		  android:label="@string/app_name"
+        		  android:screenOrientation="portrait"
+        		  android:theme="@android:style/Theme.Holo.Light">
+            <intent-filter>
+               <action android:name="org.dress.RIBBONLIST"></action>
+				<category android:name="android.intent.category.DEFAULT"></category>
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".controller.Rack" 
+        		  android:label="@string/app_name"
+        		  android:screenOrientation="portrait"
+        		  android:theme="@android:style/Theme.Holo.Light">
+            <intent-filter>
+               <action android:name="org.dress.RACK"></action>
+				<category android:name="android.intent.category.DEFAULT"></category>
+            </intent-filter>
+        </activity>
+
+    </application>
+
+<uses-sdk android:maxSdkVersion="16" android:targetSdkVersion="16" android:minSdkVersion="11"></uses-sdk>
+</manifest> 
